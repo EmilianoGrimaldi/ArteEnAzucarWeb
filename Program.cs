@@ -1,3 +1,7 @@
+using ArteEnAzucarWeb.Services;
+using ArteEnAzucarWeb.Data;       // <--- 1. AGREGAR ESTE USING (Tu DbContext)
+using Microsoft.EntityFrameworkCore; // <--- 2. AGREGAR ESTE USING (Para SQL Server)
+
 namespace ArteEnAzucarWeb
 {
     public class Program
@@ -6,9 +10,23 @@ namespace ArteEnAzucarWeb
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            // --- INICIO DE CONFIGURACIÓN DE BASE DE DATOS ---
+
+            // Leemos la cadena de conexión del appsettings.json
+            var connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
+                                   ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+
+            // Inyectamos el DbContext usando SQL Server
+            builder.Services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlServer(connectionString));
+
+            // --- FIN DE CONFIGURACIÓN DE BASE DE DATOS ---
+
+
             // Add services to the container.
             builder.Services.AddRazorPages();
             builder.Services.AddControllers();
+            builder.Services.AddScoped<IPasswordService, PasswordService>();
 
             var app = builder.Build();
 
@@ -16,7 +34,6 @@ namespace ArteEnAzucarWeb
             if (!app.Environment.IsDevelopment())
             {
                 app.UseExceptionHandler("/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
 

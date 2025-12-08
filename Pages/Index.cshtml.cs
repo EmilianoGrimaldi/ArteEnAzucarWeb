@@ -6,7 +6,6 @@ namespace ArteEnAzucarWeb.Pages
     public class IndexModel : PageModel
     {
         private readonly ILogger<IndexModel> _logger;
-        public string nombre;
 
         public IndexModel(ILogger<IndexModel> logger)
         {
@@ -15,7 +14,6 @@ namespace ArteEnAzucarWeb.Pages
 
         public void OnGet()
         {
-            nombre = "Arte en Azúcar";
         }
     }
 }

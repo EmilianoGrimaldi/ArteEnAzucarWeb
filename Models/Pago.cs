@@ -1,27 +1,44 @@
-﻿namespace ArteEnAzucarWeb.Models
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema; // Necesario para 'Column' y 'ForeignKey'
+
+namespace ArteEnAzucarWeb.Models
 {
+    public enum MetodoPago
+    {
+        TarjetaCredito,
+        Debito,
+        Transferencia
+    }
+
     public class Pago
     {
+        [Key]
         public int Id { get; set; }
+
+        // IMPORTANTE: EF Core necesita saber el tipo de dato SQL para decimales (18 dígitos, 2 decimales)
+        [Required]
+        [Column(TypeName = "decimal(18,2)")]
         public decimal Monto { get; set; }
-        DateTime FechaPago { get; set; }
 
-        bool EstadoPago { get; set; } // Ejemplo: true (completado), false (pendiente)  
+        // CORRECCIÓN: Agregado 'public' para que se guarde en la BD
+        [Required]
+        public DateTime FechaPago { get; set; } = DateTime.Now;
 
-        public string MetodoPago { get; set; } // Ejemplo: "Tarjeta de crédito", "Debito", "Transferencia"
+        // CORRECCIÓN: Agregado 'public'. 
+        // True = Aprobado, False = Rechazado/Pendiente
+        public bool EstadoPago { get; set; } = false;
 
-        public bool ProcesarPago()
-        {
-            // Lógica para procesar el pago
-            // Aquí podrías integrar con una pasarela de pagos real
-            EstadoPago = true; // Simulamos que el pago fue exitoso
-            FechaPago = DateTime.Now;
-            return EstadoPago;
-        }
+        [Required]
+        public MetodoPago MetodoPago { get; set; }
 
-        public void GenerarRecibo()
-        {
-            // Lógica para generar un recibo de pago
-        }   
+        // --- Relación 1 a 1 con Inscripción ---
+        // Esto es necesario para que la Inscripcion sepa cual es su pago
+
+        public int InscripcionId { get; set; } // Clave foránea
+
+        // Al poner [JsonIgnore] evitas ciclos infinitos si alguna vez conviertes esto a JSON (API)
+        // pero por ahora no es estrictamente necesario, solo buena práctica.
+        [ForeignKey("InscripcionId")]
+        public Inscripcion Inscripcion { get; set; } = null!;
     }
 }

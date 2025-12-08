@@ -1,24 +1,39 @@
-﻿
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace ArteEnAzucarWeb.Models
 {
+    public enum EstadoInscripcion
+    {
+        Activo,
+        Cancelado,
+        Completado
+    }
     public class Inscripcion
     {
+        [Key]
         public int Id { get; set; }
+
+        [Required]
         public DateTime FechaInscripcion { get; set; } = DateTime.Now;
-        public bool Estado { get; set; }  // Activo, En curso, Finalizado
 
-        // --- Relaciones (Foreign Keys) ---
+        [Required]
+        public EstadoInscripcion Estado { get; set; } = EstadoInscripcion.Activo;
 
-        // Conexión con el Estudiante
+        // --- Relaciones ---
+
+        [Required]
         public int EstudianteId { get; set; }
         public Estudiante Estudiante { get; set; } = null!;
 
-        // Conexión con la Oferta (Curso o Seminario)
+        [Required]
         public int OfertaAcademicaId { get; set; }
         public OfertaAcademica OfertaAcademica { get; set; } = null!;
 
-        // Conexión con el Pago (Relación 1 a 1 opcional)
-        public Pago? Pago { get; set; }
-
+        // RELACIÓN 1 a 1 OBLIGATORIA
+        // Al quitar el '?' y poner [Required], EF Core sabe que 
+        // una inscripción no puede existir sin su pago correspondiente.
+        [Required]
+        public Pago Pago { get; set; } = null!;
     }
 }
