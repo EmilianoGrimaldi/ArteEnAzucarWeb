@@ -1,6 +1,6 @@
 ﻿namespace ArteEnAzucarWeb.Models
 {
-    public class Administrador
+    public class Administrador : Usuario
     {
         public void CrearCurso()
         {

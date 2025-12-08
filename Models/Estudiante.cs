@@ -8,11 +8,11 @@ namespace ArteEnAzucarWeb.Models
         public void Registrarse()
         {             // Lógica para registrarse en la plataforma
         }
-        public void IncscribirseACurso(OfertaAcedemica oferta)
+        public void IncscribirseACurso(OfertaAcademica curso)
         {             // Lógica para inscribirse a un curso
         }
 
-        public List<Inscripciones> VerMisCursos()
+        public List<Inscripcion> VerMisCursos()
         {
             //Muestra los cursos inscriptos del estudiante
             return Inscripciones;
