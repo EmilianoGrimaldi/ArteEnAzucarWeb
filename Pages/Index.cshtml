@@ -1,10 +1,89 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Arte en Azucar";
+    ViewData["Title"] = "Bienvenido";
+    Layout = null; /* OJO: Para login solemos quitar el Layout (navbar/footer) */
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Pastelería</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+    <div class="contenedor-centrado">
+        <div class="container">
+            <div class="recetario-libro-abierto">
+                <div class="row g-0 h-100">
+                    <div class="col-md-6 pagina-izquierda d-flex align-items-center">
+                        <div class="contenido-pagina">
+                            <h2 class="titulo-recetario">Escribir Nueva Receta</h2>
+                            <p class="subtitulo-recetario mb-4">Crea tu cuenta para empezar a hornear.</p>
+
+                            <form>
+                                <div class="mb-3">
+                                    <label for="regNombre" class="form-label etiqueta-recetario">Nombre</label>
+                                    <input type="text" class="form-control input-recetario" id="regNombre" placeholder="Ej. María">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="regApellido" class="form-label etiqueta-recetario">Apellido</label>
+                                    <input type="text" class="form-control input-recetario" id="regApellido" placeholder="Ej. Suarez">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="regEdad" class="form-label etiqueta-recetario">Edad</label>
+                                    <input type="number" class="form-control input-recetario" id="regEdad" placeholder="60">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="regEmail" class="form-label etiqueta-recetario">Correo Electrónico</label>
+                                    <input type="email" class="form-control input-recetario" id="regEmail" placeholder="tu@email.com">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="regPass" class="form-label etiqueta-recetario">Contraseña Secreta</label>
+                                    <input type="password" class="form-control input-recetario" id="regPass">
+                                </div>
+                                <div class="d-grid gap-2 mt-4">
+                                    <button type="submit" class="btn btn-pastel-rosa">Registrarme en el Libro</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 pagina-derecha d-flex align-items-center">
+                        <div class="contenido-pagina">
+                            <h2 class="titulo-recetario">Abrir mi Recetario</h2>
+                            <p class="subtitulo-recetario mb-4">Accede con tus credenciales.</p>
+
+                            <form>
+                                <div class="mb-3">
+                                    <label for="loginEmail" class="form-label etiqueta-recetario">Correo Electrónico</label>
+                                    <input type="email" class="form-control input-recetario" id="loginEmail" placeholder="tu@email.com">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="loginPass" class="form-label etiqueta-recetario">Contraseña</label>
+                                    <input type="password" class="form-control input-recetario" id="loginPass">
+                                </div>
+                                <div class="mb-3 form-check text-start">
+                                    <input type="checkbox" class="form-check-input input-check-recetario" id="recuerdame">
+                                    <label class="form-check-label etiqueta-recetario-sm" for="recuerdame">Mantener abierto</label>
+                                </div>
+                                <div class="d-grid gap-2 mt-4">
+                                    <button type="submit" class="btn btn-pastel-marron">Entrar a la Cocina</button>
+                                </div>
+                                <div class="text-center mt-3">
+                                    <a href="#" class="link-recetario-sm">¿Olvidaste tu contraseña?</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,22 +1,183 @@
-html {
-  font-size: 14px;
+/* --- CONFIGURACIÓN DE PANTALLA COMPLETA --- */
+html, body {
+    height: 100%; /* Ocupar toda la altura */
+    margin: 0;
+    padding: 0;
+    overflow: hidden; /* <--- ESTO QUITA LOS SCROLLS */
+    /* Fondo "Mesa" para que el libro resalte */
+    background-color: #FCE4EC; /* Un rosa muy pálido, o usa una imagen de madera */
 }
 
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+/* Contenedor que centra el libro vertical y horizontalmente */
+.contenedor-centrado {
+    display: flex;
+    justify-content: center; /* Centrado horizontal */
+    align-items: center; /* Centrado vertical */
+    height: 100vh; /* Altura de la ventana visual */
+    width: 100vw; /* Ancho de la ventana visual */
 }
 
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+/* --- PALETA DE COLORES DE LA MARCA --- */
+:root {
+    --color-marron-principal: #5D4037; /* Marrón chocolate */
+    --color-marron-claro: #8D6E63; /* Para bordes sutiles */
+    --color-rosa-pastel: #F8BBD0; /* Rosa suave para fondos/botones */
+    --color-rosa-fuerte: #EC407A; /* Rosa más intenso para hover */
+    --color-blanco-crema: #FFF8E1; /* Color de las páginas (no blanco puro) */
+    --font-recetario: 'Georgia', serif; /* Una fuente clásica con serifa */
 }
 
-html {
-  position: relative;
-  min-height: 100%;
+/* --- ESTRUCTURA DEL LIBRO --- */
+.recetario-libro-abierto {
+    background-color: var(--color-blanco-crema);
+    border-radius: 20px;
+    /* Sombra profunda para dar efecto 3D de libro sobre la mesa */
+    box-shadow: 0 20px 40px rgba(0,0,0,0.2), /* Sombra general */
+    0 0 0 10px var(--color-marron-principal) inset; /* Borde interno grueso marrón */
+    overflow: hidden; /* Para que el contenido respete los bordes redondeados */
+    min-height: 600px; /* Altura mínima para que se vea imponente */
+    /* Opcional: Añadir una textura de papel de fondo */
+    /* background-image: url('/images/textura-papel-antiguo.png'); */
 }
 
-body {
-  margin-bottom: 60px;
+/* El lomo central que divide las páginas */
+.pagina-izquierda {
+    border-right: 3px dashed var(--color-marron-claro); /* Línea punteada central */
+    background: linear-gradient(to right, rgba(0,0,0,0.02), rgba(0,0,0,0.05)); /* Sombra sutil en el pliegue */
+}
+
+/* Padding interno para que el texto no toque los bordes */
+.contenido-pagina {
+    padding: 50px;
+    width: 100%;
+}
+
+/* --- TIPOGRAFÍA Y TEXTOS --- */
+.titulo-recetario {
+    font-family: var(--font-recetario);
+    color: var(--color-marron-principal);
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.subtitulo-recetario {
+    font-family: var(--font-recetario);
+    color: var(--color-marron-claro);
+    text-align: center;
+    font-style: italic;
+}
+
+.etiqueta-recetario {
+    font-family: var(--font-recetario);
+    color: var(--color-marron-principal);
+    font-weight: bold;
+}
+
+.etiqueta-recetario-sm, .link-recetario-sm {
+    font-family: var(--font-recetario);
+    color: var(--color-marron-claro);
+    font-size: 0.9rem;
+}
+
+    .link-recetario-sm:hover {
+        text-decoration: underline;
+        color: var(--color-rosa-fuerte);
+    }
+
+
+/* --- INPUTS PERSONALIZADOS (Estilo renglón) --- */
+.input-recetario {
+    border: none;
+    border-bottom: 2px solid var(--color-rosa-pastel); /* Línea rosa abajo */
+    background-color: transparent; /* Fondo transparente */
+    border-radius: 0; /* Sin bordes redondeados */
+    padding-left: 0;
+    color: var(--color-marron-principal);
+    font-family: var(--font-recetario);
+}
+
+    .input-recetario:focus {
+        background-color: rgba(248, 187, 208, 0.1); /* Un tono rosa muy sutil al hacer foco */
+        border-bottom-color: var(--color-rosa-fuerte);
+        box-shadow: none; /* Quitamos el brillo azul por defecto de Bootstrap */
+        color: var(--color-marron-principal);
+    }
+
+/* Checkbox personalizado */
+.input-check-recetario:checked {
+    background-color: var(--color-rosa-fuerte);
+    border-color: var(--color-rosa-fuerte);
+}
+
+/* --- BOTONES PASTELEROS --- */
+/* Botón Rosa (Para Registrarse) */
+.btn-pastel-rosa {
+    background-color: var(--color-rosa-pastel);
+    color: var(--color-marron-principal);
+    font-family: var(--font-recetario);
+    font-weight: bold;
+    border: 2px solid var(--color-rosa-pastel);
+    padding: 12px;
+    border-radius: 30px; /* Botón bien redondeado */
+    transition: all 0.3s ease;
+}
+
+    .btn-pastel-rosa:hover {
+        background-color: var(--color-rosa-fuerte);
+        border-color: var(--color-rosa-fuerte);
+        color: white;
+        transform: translateY(-2px); /* Pequeño efecto de elevación */
+    }
+
+/* Botón Marrón (Para Login) */
+.btn-pastel-marron {
+    background-color: var(--color-marron-principal);
+    color: var(--color-rosa-pastel);
+    font-family: var(--font-recetario);
+    font-weight: bold;
+    border: 2px solid var(--color-marron-principal);
+    padding: 12px;
+    border-radius: 30px;
+    transition: all 0.3s ease;
+}
+
+    .btn-pastel-marron:hover {
+        background-color: white;
+        color: var(--color-marron-principal);
+        transform: translateY(-2px);
+    }
+
+/* --- RESPONSIVE (Para celulares) --- */
+/* Cuando la pantalla es pequeña, quitamos el borde central y la altura mínima */
+/*@media (max-width: 768px) {
+    .pagina-izquierda {
+        border-right: none;
+        border-bottom: 3px dashed var(--color-marron-claro);*/ /* Ponemos la línea abajo */
+        /*background: none;
+    }
+
+    .recetario-libro-abierto {
+        min-height: auto;*/ /* Altura automática */
+    /*}
+
+    .contenido-pagina {
+        padding: 30px 20px;*/ /* Menos padding en móviles */
+    /*}
+}*/
+/* --- EXCEPCIÓN PARA MÓVILES --- */
+@media (max-width: 768px) {
+    html, body {
+        overflow: auto; /* Permitir scroll en celulares */
+        height: auto; /* Altura dinámica */
+        padding-bottom: 50px; /* Espacio extra abajo */
+    }
+
+    .contenedor-centrado {
+        height: auto; /* Ya no forzamos altura de pantalla */
+        display: block; /* Quitamos el centrado flex forzado */
+        padding-top: 20px;
+    }
 }
